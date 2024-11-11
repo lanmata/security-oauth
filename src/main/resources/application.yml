@@ -1,0 +1,8 @@
+prx:
+  auth:
+    converter:
+      resource-id: ${AUTH_CLIENT_ID}
+      principal-claim-name: ${AUTH_RESOURCE_PRINCIPAL}
+  jwt:
+    secret: ${APP_TOKEN_SECRET}
+    expirationMs: ${APP_TOKEN_EXPIRATION}
