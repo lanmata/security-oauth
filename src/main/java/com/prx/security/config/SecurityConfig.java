@@ -21,7 +21,8 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.client.RestTemplate;
 
-import static org.springframework.http.HttpMethod.GET;
+import static com.prx.security.util.AppUtil.isExcludePathValid;
+import static org.springframework.http.HttpMethod.*;
 
 /**
  * Security configuration class for the application.
@@ -48,6 +49,9 @@ public class SecurityConfig {
 
     @Value("${app.api.endpoint}")
     private String appPath;
+
+    @Value("${app.api.excludes}")
+    private String[] appPathExcludes;
 
     private final SecurityProperties securityProperties;
 
@@ -77,11 +81,25 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         LOGGER.info("Loading SecurityFilterChain");
         var jwtConverter = new JwtConverter(this.jwtConverterProperties);
+        if (isExcludePathValid(appPathExcludes)) {
+            http.csrf(AbstractHttpConfigurer::disable)
+                    .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                    .authorizeHttpRequests(auth -> auth
+                            .requestMatchers(SWAGGER_LIST).permitAll()
+                            .requestMatchers(appPathExcludes).permitAll()
+                            .anyRequest());
+        }
         http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(SWAGGER_LIST).permitAll()
                         .requestMatchers(GET, appPath.concat("/**")).hasAnyRole(clientRoleList)
+                        .requestMatchers(POST, appPath.concat("/**")).hasAnyRole(clientRoleList)
+                        .requestMatchers(PUT, appPath.concat("/**")).hasAnyRole(clientRoleList)
+                        .requestMatchers(DELETE, appPath.concat("/**")).hasAnyRole(clientRoleList)
+                        .requestMatchers(PATCH, appPath.concat("/**")).hasAnyRole(clientRoleList)
+                        .requestMatchers(OPTIONS, appPath.concat("/**")).hasAnyRole(clientRoleList)
+                        .requestMatchers(HEAD, appPath.concat("/**")).hasAnyRole(clientRoleList)
+                        .requestMatchers(TRACE, appPath.concat("/**")).hasAnyRole(clientRoleList)
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtConverter)));
 
