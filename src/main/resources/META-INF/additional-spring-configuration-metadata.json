@@ -1,0 +1,109 @@
+{
+  "properties": [
+    {
+      "name": "app.clientRoles",
+      "type": "java.lang.String",
+      "description": "Description for app.clientRoles."
+    },
+    {
+      "name": "app.name",
+      "type": "java.lang.String",
+      "description": "Description for app.name."
+    },
+    {
+      "name": "app.api.endpoint",
+      "type": "java.lang.String",
+      "description": "Description for app.api.endpoint."
+    },
+    {
+      "name": "app.api.excludes",
+      "type": "java.util.List<java.lang.String>",
+      "description": "Description for app.api.endpoint.",
+      "defaultValue": [
+        ""
+      ]
+    },
+    {
+      "name": "app.version",
+      "type": "java.lang.String",
+      "description": "Description for app.version."
+    },
+    {
+      "name": "prx.jwt.secret",
+      "type": "java.lang.String",
+      "description": "Description for prx.jwt.secret."
+    },
+    {
+      "name": "prx.jwt.expirationMs",
+      "type": "java.lang.String",
+      "description": "Description for prx.jwt.expirationMs."
+    },
+    {
+      "name": "prx.jwt.issuer",
+      "type": "java.lang.String",
+      "description": "Description for prx.jwt.issuer."
+    },
+    {
+      "name": "prx.jwt.audience",
+      "type": "java.lang.String",
+      "description": "Description for prx.jwt.audience."
+    },
+    {
+      "name": "prx.jwt.subject",
+      "type": "java.lang.String",
+      "description": "Description for prx.jwt.subject."
+    },
+    {
+      "name": "prx.jwt.claims",
+      "type": "java.lang.String",
+      "description": "Description for prx.jwt.claims."
+    },
+    {
+      "name": "prx.jwt.roles",
+      "type": "java.lang.String",
+      "description": "Description for prx.jwt.roles."
+    },
+    {
+      "name": "prx.jwt.authorities",
+      "type": "java.lang.String",
+      "description": "Description for prx.jwt.authorities."
+    },
+    {
+      "name": "prx.jwt.permissions",
+      "type": "java.lang.String",
+      "description": "Description for prx.jwt.permissions."
+    },
+    {
+      "name": "prx.jwt.claims.roles",
+      "type": "java.lang.String",
+      "description": "Description for prx.jwt.claims.roles.",
+      "defaultValue": ""
+    },
+    {
+      "name": "prx.jwt.claims.authorities",
+      "type": "java.lang.String",
+      "description": "Description for prx.jwt.claims.authorities."
+    },
+    {
+      "name": "prx.jwt.claims.permissions",
+      "type": "java.lang.String",
+      "description": "Description for prx.jwt.claims.permissions."
+    },
+    {
+      "name": "prx.jwt.claims.clientRoles",
+      "type": "java.lang.String",
+      "description": "Description for prx.jwt.claims.clientRoles."
+    },
+    {
+      "name": "prx.jwt.claims.clientRolesKey",
+      "type": "java.lang.String",
+      "description": "Description for prx.jwt.claims.clientRolesKey."
+    },
+    {
+      "name": "prx.jwt.claims.clientRolesSeparator",
+      "type": "java.lang.String",
+      "description": "Description for prx.jwt.claims.clientRolesSeparator.",
+      "defaultValue": ","
+    }
+  ]
+}
