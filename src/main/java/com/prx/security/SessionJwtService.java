@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import org.apache.commons.lang.NotImplementedException;
 
 import java.util.Date;
+import java.util.Map;
 import java.util.Optional;
 
 import static com.prx.security.constant.ConstantApp.SESSION_TOKEN_KEY;
@@ -62,12 +63,13 @@ public interface SessionJwtService {
     }
 
     /**
-     * Generates a session token for the given username.
+     * Generates a session token for the given username and parameters.
      *
-     * @param username the username for which to generate the session token
+     * @param username   the username for which the session token is generated
+     * @param parameters a map of additional parameters to include in the token
      * @return the generated session token
      */
-    String generateSessionToken(String username);
+    String generateSessionToken(String username, Map<String, String> parameters);
 
     /**
      * Retrieves the claims from the given token.
