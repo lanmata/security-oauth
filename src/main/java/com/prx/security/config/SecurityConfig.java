@@ -4,7 +4,7 @@ import com.prx.commons.exception.CertificateSecurityException;
 import com.prx.security.SecurityProperties;
 import com.prx.security.jwt.JwtConverter;
 import com.prx.security.jwt.JwtConverterProperties;
-import com.prx.security.util.KeyStoreUtil;
+import com.prx.security.util.KeystoreUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -57,7 +57,7 @@ public class SecurityConfig {
 
     private final JwtConverterProperties jwtConverterProperties;
 
-    private final KeyStoreUtil keyStoreUtil = new KeyStoreUtil();
+    private final KeystoreUtil keyStoreUtil = new KeystoreUtil();
 
     /**
      * Constructor for SecurityConfig.
