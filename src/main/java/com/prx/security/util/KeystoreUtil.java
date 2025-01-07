@@ -22,6 +22,7 @@ import java.util.Enumeration;
 
 /// Utility class for handling keystore operations.
 /// This class provides methods for loading the keystore, printing the certificates in the keystore, and getting the SSL context.
+///
 /// @version 1.0
 /// @since 1.0
 @Component
@@ -32,9 +33,11 @@ public final class KeystoreUtil {
     /// Default constructor.
     public KeystoreUtil() {
         /* Default constructor for the KeyStoreUtil class. */
+        LOGGER.info("KeyStoreUtil class instantiated.");
     }
 
     /// Get the keystore. Load the keystore from the location specified in the security properties.
+    ///
     /// @param securityProperties the security properties
     /// @return the keystore
     /// @throws CertificateSecurityException if an error occurs while loading the keystore
@@ -52,8 +55,9 @@ public final class KeystoreUtil {
     }
 
     /// Print the certificates in the keystore. Log the certificates in the keystore.
-    /// @param keystore the keystore
-    /// @param filename the filename
+    ///
+    /// @param keystore     the keystore
+    /// @param filename     the filename
     /// @param isTrustStore the is trust store
     /// @throws CertificateSecurityException if an error occurs while printing the certificates
     public void certificatePrint(KeyStore keystore, String filename, boolean isTrustStore) throws CertificateSecurityException {
@@ -79,13 +83,14 @@ public final class KeystoreUtil {
 
     /// Get the SSL context. Load the SSL context from the security properties.
     /// This method is used to create the SSL context for the server.
+    ///
     /// @param securityProperties the security properties
     /// @return the SSL context
-    /// @throws NoSuchAlgorithmException if the algorithm is not found
+    /// @throws NoSuchAlgorithmException     if the algorithm is not found
     /// @throws CertificateSecurityException if an error occurs while loading the keystore
-    /// @throws UnrecoverableKeyException if the key is unrecoverable
-    /// @throws KeyStoreException if an error occurs while loading the keystore
-    /// @throws KeyManagementException if an error occurs while loading the keystore
+    /// @throws UnrecoverableKeyException    if the key is unrecoverable
+    /// @throws KeyStoreException            if an error occurs while loading the keystore
+    /// @throws KeyManagementException       if an error occurs while loading the keystore
     /// @throws CertificateSecurityException if an error occurs while loading the keystore
     public SSLContext getSSLContext(SecurityProperties securityProperties) throws NoSuchAlgorithmException, CertificateSecurityException, UnrecoverableKeyException, KeyStoreException, KeyManagementException {
         KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
@@ -101,6 +106,7 @@ public final class KeystoreUtil {
 
     /// Get the SSL context. Load the SSL context from the security properties.
     /// This method is used to create the SSL context for the management authenticator.
+    ///
     /// @param securityProperties the security properties
     /// @return the SSL context
     /// @throws CertificateSecurityException if an error occurs while loading the keystore
@@ -112,6 +118,7 @@ public final class KeystoreUtil {
 
     /// Get the SSL context. Load the SSL context from the security properties.
     /// This method is used to create the SSL context for the management authenticator.
+    ///
     /// @param securityProperties the security properties
     /// @return the SSL context
     /// @throws CertificateSecurityException if an error occurs while loading the keystore
