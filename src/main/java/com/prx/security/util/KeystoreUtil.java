@@ -20,14 +20,24 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.util.Enumeration;
 
+/// Utility class for handling keystore operations.
+/// This class provides methods for loading the keystore, printing the certificates in the keystore, and getting the SSL context.
+/// @version 1.0
+/// @since 1.0
 @Component
-public class KeyStoreUtil {
-    private static final Logger LOGGER = LoggerFactory.getLogger(KeyStoreUtil.class);
+public final class KeystoreUtil {
 
-    public KeyStoreUtil() {
-        // Default constructor
+    private static final Logger LOGGER = LoggerFactory.getLogger(KeystoreUtil.class);
+
+    /// Default constructor.
+    public KeystoreUtil() {
+        /* Default constructor for the KeyStoreUtil class. */
     }
 
+    /// Get the keystore. Load the keystore from the location specified in the security properties.
+    /// @param securityProperties the security properties
+    /// @return the keystore
+    /// @throws CertificateSecurityException if an error occurs while loading the keystore
     public KeyStore getKeyStore(StoreProperties securityProperties) throws CertificateSecurityException {
         KeyStore keyStore;
         // Load Truststore
@@ -41,6 +51,11 @@ public class KeyStoreUtil {
         return keyStore;
     }
 
+    /// Print the certificates in the keystore. Log the certificates in the keystore.
+    /// @param keystore the keystore
+    /// @param filename the filename
+    /// @param isTrustStore the is trust store
+    /// @throws CertificateSecurityException if an error occurs while printing the certificates
     public void certificatePrint(KeyStore keystore, String filename, boolean isTrustStore) throws CertificateSecurityException {
         // Log the certificates in the truststore
         Enumeration<String> aliases;
@@ -62,6 +77,16 @@ public class KeyStoreUtil {
         }
     }
 
+    /// Get the SSL context. Load the SSL context from the security properties.
+    /// This method is used to create the SSL context for the server.
+    /// @param securityProperties the security properties
+    /// @return the SSL context
+    /// @throws NoSuchAlgorithmException if the algorithm is not found
+    /// @throws CertificateSecurityException if an error occurs while loading the keystore
+    /// @throws UnrecoverableKeyException if the key is unrecoverable
+    /// @throws KeyStoreException if an error occurs while loading the keystore
+    /// @throws KeyManagementException if an error occurs while loading the keystore
+    /// @throws CertificateSecurityException if an error occurs while loading the keystore
     public SSLContext getSSLContext(SecurityProperties securityProperties) throws NoSuchAlgorithmException, CertificateSecurityException, UnrecoverableKeyException, KeyStoreException, KeyManagementException {
         KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
         TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
@@ -74,12 +99,22 @@ public class KeyStoreUtil {
         return sslContext;
     }
 
+    /// Get the SSL context. Load the SSL context from the security properties.
+    /// This method is used to create the SSL context for the management authenticator.
+    /// @param securityProperties the security properties
+    /// @return the SSL context
+    /// @throws CertificateSecurityException if an error occurs while loading the keystore
     public SslBundle getSslBundle(SecurityProperties securityProperties) throws CertificateSecurityException {
         return loadSslBundle(getKeyStore(securityProperties.getKeystore()),
                 getKeyStore(securityProperties.getTruststore()),
                 securityProperties.getKeystore().getPassword());
     }
 
+    /// Get the SSL context. Load the SSL context from the security properties.
+    /// This method is used to create the SSL context for the management authenticator.
+    /// @param securityProperties the security properties
+    /// @return the SSL context
+    /// @throws CertificateSecurityException if an error occurs while loading the keystore
     public SslBundle getManagementAuthenticatorSslBundle(SecurityProperties securityProperties) throws CertificateSecurityException {
         return loadSslBundle(getKeyStore(securityProperties.getManagementAuthenticator().getKeystore()),
                 getKeyStore(securityProperties.getManagementAuthenticator().getTruststore()),
