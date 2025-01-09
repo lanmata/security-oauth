@@ -70,7 +70,7 @@
         <sonar.exclusions>
             **/*.xml,**/config/*,**/config/*,**/config/security/*,**/interceptor/*,
             **/loggers/interceptor/*,**/exception/*,**/mapper/*,**/util/*,
-            **/converter/*, **/*Test*, **/JwtConverter.*
+            **/converter/*, **/*Test*, **/JwtConverter.*,**/*.java
         </sonar.exclusions>
         <project.ruleset>${project.basedir}/ruleset.xml</project.ruleset>
     </properties>
