@@ -1,6 +1,6 @@
 package com.prx.security.jwt;
 
-import com.prx.commons.exception.JwtConverterException;
+import com.prx.security.exception.JwtConverterException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.core.convert.converter.Converter;

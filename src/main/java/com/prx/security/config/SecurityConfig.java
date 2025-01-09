@@ -1,7 +1,7 @@
 package com.prx.security.config;
 
-import com.prx.commons.exception.CertificateSecurityException;
-import com.prx.security.SecurityProperties;
+import com.prx.security.exception.CertificateSecurityException;
+import com.prx.security.properties.SecurityProperties;
 import com.prx.security.jwt.JwtConverter;
 import com.prx.security.jwt.JwtConverterProperties;
 import com.prx.security.util.KeystoreUtil;

@@ -1,6 +1,5 @@
 package com.prx.security.exception;
 
-import com.prx.commons.exception.CertificateSecurityException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +10,7 @@ class CertificateSecurityExceptionTest {
     @Test
     @DisplayName("Default constructor creates instance")
     void defaultConstructorCreatesInstance() {
-        com.prx.commons.exception.CertificateSecurityException exception = new com.prx.commons.exception.CertificateSecurityException();
+        CertificateSecurityException exception = new CertificateSecurityException();
         assertNotNull(exception);
     }
 
@@ -19,7 +18,7 @@ class CertificateSecurityExceptionTest {
     @DisplayName("Constructor with message creates instance with message")
     void constructorWithMessageCreatesInstanceWithMessage() {
         String message = "Error message";
-        com.prx.commons.exception.CertificateSecurityException exception = new com.prx.commons.exception.CertificateSecurityException(message);
+        CertificateSecurityException exception = new CertificateSecurityException(message);
         assertEquals(message, exception.getMessage());
     }
 
@@ -28,7 +27,7 @@ class CertificateSecurityExceptionTest {
     void constructorWithMessageAndCauseCreatesInstanceWithMessageAndCause() {
         String message = "Error message";
         Throwable cause = new Throwable("Cause");
-        com.prx.commons.exception.CertificateSecurityException exception = new com.prx.commons.exception.CertificateSecurityException(message, cause);
+        CertificateSecurityException exception = new CertificateSecurityException(message, cause);
         assertEquals(message, exception.getMessage());
         assertEquals(cause, exception.getCause());
     }
@@ -37,7 +36,7 @@ class CertificateSecurityExceptionTest {
     @DisplayName("Constructor with cause creates instance with cause")
     void constructorWithCauseCreatesInstanceWithCause() {
         Throwable cause = new Throwable("Cause");
-        com.prx.commons.exception.CertificateSecurityException exception = new com.prx.commons.exception.CertificateSecurityException(cause);
+        CertificateSecurityException exception = new CertificateSecurityException(cause);
         assertEquals(cause, exception.getCause());
     }
 
@@ -48,7 +47,7 @@ class CertificateSecurityExceptionTest {
         Throwable cause = new Throwable("Cause");
         boolean enableSuppression = true;
         boolean writableStackTrace = false;
-        com.prx.commons.exception.CertificateSecurityException exception = new CertificateSecurityException(message, cause, enableSuppression, writableStackTrace);
+        CertificateSecurityException exception = new CertificateSecurityException(message, cause, enableSuppression, writableStackTrace);
         assertEquals(message, exception.getMessage());
         assertEquals(cause, exception.getCause());
         assertFalse(exception.getStackTrace().length > 0);

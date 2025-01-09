@@ -1,4 +1,4 @@
-package com.prx.security;
+package com.prx.security.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
