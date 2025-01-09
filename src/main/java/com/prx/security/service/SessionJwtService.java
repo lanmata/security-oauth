@@ -1,4 +1,4 @@
-package com.prx.security;
+package com.prx.security.service;
 
 import io.jsonwebtoken.Claims;
 import org.apache.commons.lang.NotImplementedException;

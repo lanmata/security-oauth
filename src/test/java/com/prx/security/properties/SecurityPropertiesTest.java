@@ -1,4 +1,4 @@
-package com.prx.security;
+package com.prx.security.properties;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
