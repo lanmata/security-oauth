@@ -58,7 +58,7 @@ We welcome contributions to the `security-oauth` project. If you would like to c
 4. Create a pull request with a detailed description of your changes.
 
 ## License
-This project is licensed under the MIT License. See the `LICENSE` file for more details.
+Pending license.
 
 ## Authors and Acknowledgments
 This project is maintained by the PRX team. We would like to thank all contributors and users for their support and feedback.

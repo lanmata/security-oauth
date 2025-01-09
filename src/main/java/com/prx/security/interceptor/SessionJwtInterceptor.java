@@ -1,6 +1,6 @@
 package com.prx.security.interceptor;
 
-import com.prx.security.SessionJwtService;
+import com.prx.security.service.SessionJwtService;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

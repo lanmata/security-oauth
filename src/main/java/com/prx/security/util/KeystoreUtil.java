@@ -1,8 +1,8 @@
 package com.prx.security.util;
 
-import com.prx.commons.exception.CertificateSecurityException;
-import com.prx.security.SecurityProperties;
-import com.prx.security.StoreProperties;
+import com.prx.security.exception.CertificateSecurityException;
+import com.prx.security.properties.SecurityProperties;
+import com.prx.security.properties.StoreProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.ssl.SslBundle;
