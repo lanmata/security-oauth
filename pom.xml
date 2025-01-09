@@ -68,9 +68,9 @@
         <!--        Coverage and Sonar-->
         <sonar.organization>prx</sonar.organization>
         <sonar.exclusions>
-            **/*.xml,**/*Application.*,**/config/*,**/config/jwt/*,**/config/jackson/*,**/config/*,
-            **/config/security/*,**/loggers/*,**/loggers/interceptor/*,**/exception/*,**/mapper/*,
-            **/mapper/decorator/*,**/converter/*, **/*Test*, **/session/*
+            **/*.xml,**/config/*,**/config/*,**/config/security/*,**/interceptor/*,
+            **/loggers/interceptor/*,**/exception/*,**/mapper/*,**/util/*,
+            **/converter/*, **/*Test*, **/JwtConverter.*
         </sonar.exclusions>
         <project.ruleset>${project.basedir}/ruleset.xml</project.ruleset>
     </properties>
