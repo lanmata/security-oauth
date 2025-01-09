@@ -14,12 +14,12 @@ import static com.prx.security.constant.ConstantApp.SESSION_TOKEN_KEY;
 @FeignClient(name = "backboneClient", url = "https://prx-qa.backbone.tst/backbone", configuration = BackendFeignClientInterceptor.class)
 public interface BackboneClient {
 
-    @GetMapping("/v1/session/validate")
+    @GetMapping("/api/v1/session/validate")
     boolean validate(@RequestHeader(SESSION_TOKEN_KEY) String sessionToken);
 
-    @PostMapping("/v1/session")
+    @PostMapping("/api/v1/session")
     String token(AuthRequest authRequest);
 
-    @PostMapping("/v1/users")
+    @PostMapping("/api/v1/users")
     BackboneUserCreateResponse post(BackboneUserCreateRequest backboneUserCreateRequest);
 }
