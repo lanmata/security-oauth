@@ -1,9 +1,12 @@
 package com.prx.security.service;
 
+import com.prx.security.exception.CertificateSecurityException;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.apache.commons.lang.NotImplementedException;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Map;
 import java.util.Optional;
 
@@ -23,12 +26,15 @@ public interface SessionJwtService {
      * @param token the JWT token
      * @return true if the token is expired, false otherwise
      */
-    default boolean isTokenExpired(String token) {
+    default boolean isTokenExpired(String token) throws Exception {
         try {
             Claims claims = getTokenClaims(token);
-            return claims.getExpiration().before(new Date());
-        } catch (Exception e) {
+            return LocalDateTime.now().isAfter(claims.getExpiration().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+//            return claims.getExpiration().before(new Date());
+        } catch (ExpiredJwtException e) {
             return true;
+        } catch (Exception e) {
+            throw e;
         }
     }
 
@@ -41,8 +47,10 @@ public interface SessionJwtService {
     default boolean isValid(String token) {
         try {
             Claims claims = getTokenClaims(token);
-            return SESSION_TOKEN_KEY.equals(getTokenClaims(token).get("type")) && new Date().before(claims.getExpiration());
-        } catch (Exception e) {
+            return SESSION_TOKEN_KEY.equals(claims.get("type")) && !isTokenExpired(token);
+        } catch (ExpiredJwtException | NotImplementedException e) {
+            return false;
+        }  catch (Exception e) {
             return false;
         }
     }
@@ -77,7 +85,7 @@ public interface SessionJwtService {
      * @param token the JWT token
      * @return the claims contained in the token
      */
-    default Claims getTokenClaims(String token) {
+    default Claims getTokenClaims(String token) throws CertificateSecurityException {
         throw new NotImplementedException();
     }
 
