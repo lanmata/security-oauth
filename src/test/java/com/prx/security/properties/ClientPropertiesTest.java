@@ -8,12 +8,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-class AuthPropertiesTest {
+class ClientPropertiesTest {
 
     @Test
     @DisplayName("Should create AuthProperties with default constructor")
-    void shouldCreateAuthPropertiesWithDefaultConstructor() {
-        AuthProperties properties = new AuthProperties();
+    void shouldCreateClientPropertiesWithDefaultConstructor() {
+        ClientProperties properties = new ClientProperties();
         assertNull(properties.getAuthorizationGrantType());
         assertNull(properties.getScope());
         assertNull(properties.getClientSecret());
@@ -26,7 +26,7 @@ class AuthPropertiesTest {
     @Test
     @DisplayName("Should set and get authorization grant type")
     void shouldSetAndGetAuthorizationGrantType() {
-        AuthProperties properties = new AuthProperties();
+        ClientProperties properties = new ClientProperties();
         properties.setAuthorizationGrantType("authorizationGrantType");
         assertEquals("authorizationGrantType", properties.getAuthorizationGrantType());
     }
@@ -34,7 +34,7 @@ class AuthPropertiesTest {
     @Test
     @DisplayName("Should set and get scope")
     void shouldSetAndGetScope() {
-        AuthProperties properties = new AuthProperties();
+        ClientProperties properties = new ClientProperties();
         properties.setScope("scope");
         assertEquals("scope", properties.getScope());
     }
@@ -42,7 +42,7 @@ class AuthPropertiesTest {
     @Test
     @DisplayName("Should set and get client secret")
     void shouldSetAndGetClientSecret() {
-        AuthProperties properties = new AuthProperties();
+        ClientProperties properties = new ClientProperties();
         properties.setClientSecret("clientSecret");
         assertEquals("clientSecret", properties.getClientSecret());
     }
@@ -50,7 +50,7 @@ class AuthPropertiesTest {
     @Test
     @DisplayName("Should set and get client ID")
     void shouldSetAndGetClientId() {
-        AuthProperties properties = new AuthProperties();
+        ClientProperties properties = new ClientProperties();
         properties.setClientId("clientId");
         assertEquals("clientId", properties.getClientId());
     }
@@ -58,7 +58,7 @@ class AuthPropertiesTest {
     @Test
     @DisplayName("Should set and get redirect URI")
     void shouldSetAndGetRedirectUri() {
-        AuthProperties properties = new AuthProperties();
+        ClientProperties properties = new ClientProperties();
         properties.setRedirectUri("redirectUri");
         assertEquals("redirectUri", properties.getRedirectUri());
     }
@@ -66,7 +66,7 @@ class AuthPropertiesTest {
     @Test
     @DisplayName("Should set and get username")
     void shouldSetAndGetUsername() {
-        AuthProperties properties = new AuthProperties();
+        ClientProperties properties = new ClientProperties();
         properties.setUsername("username");
         assertEquals("username", properties.getUsername());
     }
@@ -74,7 +74,7 @@ class AuthPropertiesTest {
     @Test
     @DisplayName("Should set and get password")
     void shouldSetAndGetPassword() {
-        AuthProperties properties = new AuthProperties();
+        ClientProperties properties = new ClientProperties();
         properties.setPassword("password");
         assertEquals("password", properties.getPassword());
     }
@@ -82,7 +82,7 @@ class AuthPropertiesTest {
     @Test
     @DisplayName("Should handle null authorization grant type")
     void shouldHandleNullAuthorizationGrantType() {
-        AuthProperties properties = new AuthProperties();
+        ClientProperties properties = new ClientProperties();
         properties.setAuthorizationGrantType(null);
         assertNull(properties.getAuthorizationGrantType());
     }
@@ -90,7 +90,7 @@ class AuthPropertiesTest {
     @Test
     @DisplayName("Should handle null scope")
     void shouldHandleNullScope() {
-        AuthProperties properties = new AuthProperties();
+        ClientProperties properties = new ClientProperties();
         properties.setScope(null);
         assertNull(properties.getScope());
     }
@@ -98,7 +98,7 @@ class AuthPropertiesTest {
     @Test
     @DisplayName("Should handle null client secret")
     void shouldHandleNullClientSecret() {
-        AuthProperties properties = new AuthProperties();
+        ClientProperties properties = new ClientProperties();
         properties.setClientSecret(null);
         assertNull(properties.getClientSecret());
     }
@@ -106,7 +106,7 @@ class AuthPropertiesTest {
     @Test
     @DisplayName("Should handle null client ID")
     void shouldHandleNullClientId() {
-        AuthProperties properties = new AuthProperties();
+        ClientProperties properties = new ClientProperties();
         properties.setClientId(null);
         assertNull(properties.getClientId());
     }
@@ -114,7 +114,7 @@ class AuthPropertiesTest {
     @Test
     @DisplayName("Should handle null redirect URI")
     void shouldHandleNullRedirectUri() {
-        AuthProperties properties = new AuthProperties();
+        ClientProperties properties = new ClientProperties();
         properties.setRedirectUri(null);
         assertNull(properties.getRedirectUri());
     }
@@ -122,7 +122,7 @@ class AuthPropertiesTest {
     @Test
     @DisplayName("Should handle null username")
     void shouldHandleNullUsername() {
-        AuthProperties properties = new AuthProperties();
+        ClientProperties properties = new ClientProperties();
         properties.setUsername(null);
         assertNull(properties.getUsername());
     }
@@ -130,7 +130,7 @@ class AuthPropertiesTest {
     @Test
     @DisplayName("Should handle null password")
     void shouldHandleNullPassword() {
-        AuthProperties properties = new AuthProperties();
+        ClientProperties properties = new ClientProperties();
         properties.setPassword(null);
         assertNull(properties.getPassword());
     }
