@@ -14,10 +14,20 @@ public interface AuthService {
     /**
      * Generates a token based on the provided authentication request.
      *
-     * @param authRequest the authentication request containing necessary credentials
+     * @param authRequest the authentication request containing the necessary credentials
      * @return a ResponseEntity containing the authentication response and HTTP status
      */
     default ResponseEntity<AuthResponse> token(AuthRequest authRequest) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    /**
+     * Generates a token based on the provided authentication request.
+     * @param authRequest the authentication request containing the necessary credentials
+     * @param sessionTokenBkd the session token used for backend session validation
+     * @return a ResponseEntity containing the authentication response and HTTP status
+     */
+    default ResponseEntity<AuthResponse> token(AuthRequest authRequest, String sessionTokenBkd) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 

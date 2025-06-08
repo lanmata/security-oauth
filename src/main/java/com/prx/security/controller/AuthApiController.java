@@ -3,10 +3,9 @@ package com.prx.security.controller;
 import com.prx.security.service.AuthService;
 import com.prx.security.to.AuthRequest;
 import com.prx.security.to.AuthResponse;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,5 +30,11 @@ public class AuthApiController implements AuthAPi {
             return authService.token(authRequest);
         }
         return ResponseEntity.badRequest().build();
+    }
+
+    ///  {@inheritDoc}
+    @Override
+    public ResponseEntity<AuthResponse> generateTokenSession(@RequestHeader(BACKBONE_SESSION_TOKEN) String sessionTokenBkd, @RequestBody AuthRequest authRequest) {
+        return authService.token(authRequest, sessionTokenBkd);
     }
 }
