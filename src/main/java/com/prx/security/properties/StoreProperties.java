@@ -1,4 +1,4 @@
-package com.prx.security;
+package com.prx.security.properties;
 
 /**
  * Properties for keystore and truststore configuration.

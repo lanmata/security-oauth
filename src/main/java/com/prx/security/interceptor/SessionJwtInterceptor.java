@@ -1,14 +1,19 @@
 package com.prx.security.interceptor;
 
-import com.prx.security.SessionJwtService;
+import com.prx.security.service.SessionJwtService;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
+
+import java.util.Arrays;
+import java.util.Objects;
 
 import static com.prx.security.constant.ConstantApp.SESSION_TOKEN_KEY;
 
@@ -22,6 +27,9 @@ public class SessionJwtInterceptor implements HandlerInterceptor {
     private static final Logger LOGGER = LoggerFactory.getLogger(SessionJwtInterceptor.class);
 
     private final SessionJwtService sessionJwtService;
+
+    @Value("${app.api.exclude.methods}")
+    private String[] methodsExcludes;
 
     /**
      * Constructor to initialize SessionJwtInterceptor with SessionJwtService.
@@ -44,6 +52,11 @@ public class SessionJwtInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String sessionToken = request.getHeader(SESSION_TOKEN_KEY);
         try {
+            if(handler instanceof HandlerMethod handlerMethod  && Objects.nonNull(methodsExcludes) && methodsExcludes.length > 0) {
+                var result = Arrays.stream(methodsExcludes).filter(s -> handlerMethod.getMethod().getName().contains(s)).findFirst();
+                if(result.isPresent() && !result.get().isBlank())
+                    return true;
+            }
             if (sessionToken == null || sessionToken.isBlank() || !sessionJwtService.isValid(sessionToken)) {
                 response.setStatus(HttpStatus.UNAUTHORIZED.value());
                 response.addHeader("Message-ID", "Token invalid.");
