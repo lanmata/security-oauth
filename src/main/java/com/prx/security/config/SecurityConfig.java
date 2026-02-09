@@ -25,7 +25,10 @@ import static com.prx.security.util.AppUtil.isExcludePathValid;
 import static org.springframework.http.HttpMethod.*;
 
 /**
- * Security configuration class for the application.
+ * Security configuration for the application.
+ * <p>
+ * Registers the resource server, JWT decoder and the security filter chain.
+ * </p>
  */
 @Configuration
 @EnableWebSecurity

@@ -1,6 +1,9 @@
 package com.prx.security.properties;
 
-/// Represents the properties for a client.
+/**
+ * Configuration properties for an OAuth client.
+ * This object represents a client configuration that can be loaded from application properties.
+ */
 public class ClientProperties {
 
     private String id;

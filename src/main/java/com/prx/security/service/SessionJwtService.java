@@ -3,7 +3,7 @@ package com.prx.security.service;
 import com.prx.security.exception.CertificateSecurityException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
