@@ -15,6 +15,10 @@ public class ClientProperties {
     private String username;
     private String password;
 
+    public ClientProperties() {
+        // Default constructor
+    }
+
     public String getId() {
         return id;
     }
