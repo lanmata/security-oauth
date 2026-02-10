@@ -9,20 +9,36 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/// AuthApiController is a REST controller that handles authentication requests.
+/**
+ * REST controller that exposes authentication endpoints.
+ * <p>
+ * Implements `AuthAPi` to provide token generation and validation endpoints.
+ * </p>
+ */
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthApiController implements AuthAPi {
 
-    ///  The AuthService instance.
+    /**
+     * The authentication service used to perform token operations.
+     */
     private final AuthService authService;
 
-    /// Constructor for AuthApiController.
+    /**
+     * Creates a new instance of {@link AuthApiController}.
+     *
+     * @param authService the authentication service
+     */
     public AuthApiController(AuthService authService) {
         this.authService = authService;
     }
 
-    /// {@inheritDoc}
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Validates the provided session token before requesting a token from the service.
+     * </p>
+     */
     @Override
     public ResponseEntity<AuthResponse> accessToken(String sessionTokenBkd, AuthRequest authRequest) {
         boolean isValid = authService.validate(sessionTokenBkd);
@@ -32,7 +48,9 @@ public class AuthApiController implements AuthAPi {
         return ResponseEntity.badRequest().build();
     }
 
-    ///  {@inheritDoc}
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ResponseEntity<AuthResponse> generateTokenSession(@RequestHeader(BACKBONE_SESSION_TOKEN) String sessionTokenBkd, @RequestBody AuthRequest authRequest) {
         return authService.token(authRequest, sessionTokenBkd);

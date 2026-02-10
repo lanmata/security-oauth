@@ -2,6 +2,9 @@ package com.prx.security.util;
 
 import java.util.Objects;
 
+/**
+ * Small application utilities used across the module.
+ */
 public final class AppUtil {
     private AppUtil() {
         //Default constructor
