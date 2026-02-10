@@ -31,7 +31,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>21</java.version>
         <!-- argLine used by Surefire/Jacoco; default empty so builds don't fail when not set -->
-        <argLine></argLine>
+        <argLine/>
         <google.gson.version>2.10.1</google.gson.version>
         <!--        PRX Commons-->
         <com.prx.commons.version>0.0.1</com.prx.commons.version>
@@ -40,7 +40,7 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven.plugin.javadoc.version>3.6.3</maven.plugin.javadoc.version>
-        <maven.plugin.jacoco.version>0.8.12</maven.plugin.jacoco.version>
+        <maven.plugin.jacoco.version>0.8.14</maven.plugin.jacoco.version>
         <maven.plugin.pmd.version>3.23.0</maven.plugin.pmd.version>
         <maven.plugin.jxr.version>3.0.0</maven.plugin.jxr.version>
         <maven.surefire.version>3.5.2</maven.surefire.version>
@@ -74,9 +74,7 @@
             **/loggers/interceptor/*,**/exception/*,**/mapper/*,**/util/*,
             **/converter/*, **/*Test*, **/JwtConverter.*,**/*.java
         </sonar.exclusions>
-        <sonar.coverage.jacoco.xmlReportPaths>
-            ../${project.name}}/target/site/jacoco-aggregate/jacoco.xml
-        </sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         <project.ruleset>${project.basedir}/ruleset.xml</project.ruleset>
         <!-- Centralized 3rd-party versions -->
         <commons-lang3.version>3.17.0</commons-lang3.version>
@@ -282,7 +280,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.version}</version>
                 <configuration>
-                    <argLine>${argLine}</argLine>
+                    <argLine/>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -336,6 +334,22 @@
                             <goal>prepare-agent</goal>
                         </goals>
                         <phase>initialize</phase>
+                        <configuration>
+                            <!-- write the exec file to a predictable location -->
+                            <destFile>${project.build.directory}/jacoco.exec</destFile>
+                            <append>true</append>
+                            <!-- set propertyName so Surefire picks up the agent JVM arg -->
+                            <propertyName>argLine</propertyName>
+                            <!-- exclude JDK, tooling and mocking libs from instrumentation to avoid Unsupported major version issues -->
+                            <excludes>
+                                <exclude>sun/**</exclude>
+                                <exclude>jdk/**</exclude>
+                                <exclude>com/sun/**</exclude>
+                                <exclude>net/bytebuddy/**</exclude>
+                                <exclude>org/mockito/**</exclude>
+                                <exclude>org/junit/**</exclude>
+                            </excludes>
+                        </configuration>
                     </execution>
                     <execution>
                         <id>report</id>
@@ -343,6 +357,13 @@
                             <goal>report</goal>
                         </goals>
                         <phase>verify</phase>
+                        <configuration>
+                            <!-- generate both XML (for Sonar and CI) and HTML (for local inspection) -->
+                            <formats>
+                                <format>XML</format>
+                                <format>HTML</format>
+                            </formats>
+                        </configuration>
                     </execution>
                     <execution>
                         <id>jacoco-check</id>
@@ -412,6 +433,14 @@
         </repository>
     </repositories>
 
+    <pluginRepositories>
+        <pluginRepository>
+            <id>maven-central</id>
+            <name>Maven Central Plugin Repo</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </pluginRepository>
+    </pluginRepositories>
+
     <distributionManagement>
         <repository>
             <id>repsy</id>
@@ -422,24 +451,13 @@
 
     <profiles>
         <profile>
-            <id>disable-jacoco-on-new-jdk</id>
-            <activation>
-                <!-- Activate this profile automatically when running on JDK 21 or newer -->
-                <jdk>[21,)</jdk>
-            </activation>
-            <properties>
-                <!-- jacoco-maven-plugin honors property 'jacoco.skip' to disable agent -->
-                <jacoco.skip>true</jacoco.skip>
-            </properties>
-        </profile>
-        <profile>
             <id>coverage</id>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
-                        <version>0.8.14</version>
+                        <version>${maven.plugin.jacoco.version}</version>
                         <executions>
                             <execution>
                                 <id>prepare-agent</id>
