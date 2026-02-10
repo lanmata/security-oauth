@@ -55,6 +55,7 @@
         <spring-cloud.version>2025.0.1</spring-cloud.version>
         <spring-cloud-dependencies.version>4.2.0</spring-cloud-dependencies.version>
         <spring-security-aouth2-autoconfigure.version>3.4.1</spring-security-aouth2-autoconfigure.version>
+        <spring-cloud-dependencies.version.version>4.1.3</spring-cloud-dependencies.version.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <!--        JWT Dependencies version-->
         <jwt.version>0.12.3</jwt.version>
