@@ -2,7 +2,7 @@ package com.prx.security.service;
 
 import com.prx.security.to.AuthRequest;
 import com.prx.security.to.AuthResponse;
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;

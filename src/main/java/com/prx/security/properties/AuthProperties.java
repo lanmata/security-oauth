@@ -5,7 +5,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-/// Represents the properties for authentication.
+/**
+ * Configuration properties that hold authentication client configurations.
+ * The `clients` property contains a list of configured OAuth clients.
+ */
 @Component
 @ConfigurationProperties(prefix = "prx.auth")
 public class AuthProperties {

@@ -20,27 +20,35 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.util.Enumeration;
 
-/// Utility class for handling keystore operations.
-/// This class provides methods for loading the keystore, printing the certificates in the keystore, and getting the SSL context.
-///
-/// @version 1.0
-/// @since 1.0
+/**
+ * Utility class for handling keystore operations.
+ * <p>
+ * Provides methods to load a keystore from the classpath, print certificates and build SSL bundles/contexts
+ * used by the application.
+ * </p>
+ *
+ * @since 1.0
+ */
 @Component
 public final class KeystoreUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(KeystoreUtil.class);
 
-    /// Default constructor.
+    /**
+     * Default constructor.
+     */
     public KeystoreUtil() {
         /* Default constructor for the KeyStoreUtil class. */
         LOGGER.info("KeyStoreUtil class instantiated.");
     }
 
-    /// Get the keystore. Load the keystore from the location specified in the security properties.
-    ///
-    /// @param securityProperties the security properties
-    /// @return the keystore
-    /// @throws CertificateSecurityException if an error occurs while loading the keystore
+    /**
+     * Load a keystore from the classpath using the provided {@link StoreProperties}.
+     *
+     * @param securityProperties the store properties containing location, password and type
+     * @return the loaded {@link KeyStore}
+     * @throws CertificateSecurityException when a loading error occurs (I/O, certificate or keystore errors)
+     */
     public KeyStore getKeyStore(StoreProperties securityProperties) throws CertificateSecurityException {
         KeyStore keyStore;
         // Load Truststore
@@ -54,12 +62,15 @@ public final class KeystoreUtil {
         return keyStore;
     }
 
-    /// Print the certificates in the keystore. Log the certificates in the keystore.
-    ///
-    /// @param keystore     the keystore
-    /// @param filename     the filename
-    /// @param isTrustStore the is trust store
-    /// @throws CertificateSecurityException if an error occurs while printing the certificates
+    /**
+     * Print certificates contained in the provided keystore.
+     * <p>Logs basic certificate information for each alias.</p>
+     *
+     * @param keystore     the keystore to inspect
+     * @param filename     the filename (used for logging)
+     * @param isTrustStore true when the keystore is actually a truststore
+     * @throws CertificateSecurityException when an error occurs while reading aliases
+     */
     public void certificatePrint(KeyStore keystore, String filename, boolean isTrustStore) throws CertificateSecurityException {
         // Log the certificates in the truststore
         Enumeration<String> aliases;
@@ -81,17 +92,17 @@ public final class KeystoreUtil {
         }
     }
 
-    /// Get the SSL context. Load the SSL context from the security properties.
-    /// This method is used to create the SSL context for the server.
-    ///
-    /// @param securityProperties the security properties
-    /// @return the SSL context
-    /// @throws NoSuchAlgorithmException     if the algorithm is not found
-    /// @throws CertificateSecurityException if an error occurs while loading the keystore
-    /// @throws UnrecoverableKeyException    if the key is unrecoverable
-    /// @throws KeyStoreException            if an error occurs while loading the keystore
-    /// @throws KeyManagementException       if an error occurs while loading the keystore
-    /// @throws CertificateSecurityException if an error occurs while loading the keystore
+    /**
+     * Build an {@link SSLContext} from the configured security properties.
+     *
+     * @param securityProperties the security configuration containing keystore and truststore info
+     * @return the initialized {@link SSLContext}
+     * @throws NoSuchAlgorithmException     when the requested algorithm is unavailable
+     * @throws CertificateSecurityException when keystore loading fails
+     * @throws UnrecoverableKeyException    when the key cannot be recovered
+     * @throws KeyStoreException            when keystore operations fail
+     * @throws KeyManagementException       when SSL context initialization fails
+     */
     public SSLContext getSSLContext(SecurityProperties securityProperties) throws NoSuchAlgorithmException, CertificateSecurityException, UnrecoverableKeyException, KeyStoreException, KeyManagementException {
         KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
         TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
@@ -104,24 +115,26 @@ public final class KeystoreUtil {
         return sslContext;
     }
 
-    /// Get the SSL context. Load the SSL context from the security properties.
-    /// This method is used to create the SSL context for the management authenticator.
-    ///
-    /// @param securityProperties the security properties
-    /// @return the SSL context
-    /// @throws CertificateSecurityException if an error occurs while loading the keystore
+    /**
+     * Build an {@link SslBundle} used by Spring from provided security properties.
+     *
+     * @param securityProperties the security configuration containing keystore and truststore info
+     * @return the {@link SslBundle}
+     * @throws CertificateSecurityException when keystore loading fails
+     */
     public SslBundle getSslBundle(SecurityProperties securityProperties) throws CertificateSecurityException {
         return loadSslBundle(getKeyStore(securityProperties.getKeystore()),
                 getKeyStore(securityProperties.getTruststore()),
                 securityProperties.getKeystore().getPassword());
     }
 
-    /// Get the SSL context. Load the SSL context from the security properties.
-    /// This method is used to create the SSL context for the management authenticator.
-    ///
-    /// @param securityProperties the security properties
-    /// @return the SSL context
-    /// @throws CertificateSecurityException if an error occurs while loading the keystore
+    /**
+     * Build an {@link SslBundle} for management authenticator using specific alias.
+     *
+     * @param securityProperties the security configuration containing management authenticator details
+     * @return the {@link SslBundle}
+     * @throws CertificateSecurityException when keystore loading fails
+     */
     public SslBundle getManagementAuthenticatorSslBundle(SecurityProperties securityProperties) throws CertificateSecurityException {
         return loadSslBundle(getKeyStore(securityProperties.getManagementAuthenticator().getKeystore()),
                 getKeyStore(securityProperties.getManagementAuthenticator().getTruststore()),

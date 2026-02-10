@@ -3,6 +3,12 @@ package com.prx.security.jwt;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Configuration properties for JWT handling.
+ * <p>
+ * Holds the JWT secret and expiration configuration used by JWT utilities.
+ * </p>
+ */
 @Configuration
 @ConfigurationProperties(prefix = "prx.jwt")
 public class JwtConfigProperties {

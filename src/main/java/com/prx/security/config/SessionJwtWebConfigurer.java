@@ -9,11 +9,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import static com.prx.security.util.AppUtil.isExcludePathValid;
 
 /**
- * SessionJwtWebConfigurer.
- *
- * @author Luis Antonio Mata
- * @version 1.0.0, 2024-11-10
- * @since 17
+ * Registers the {@link SessionJwtInterceptor} and applies include/exclude path configuration.
+ * <p>
+ * This configurer binds the interceptor to the configured API path and excludes any configured paths.
+ * </p>
  */
 @Configuration
 public class SessionJwtWebConfigurer implements WebMvcConfigurer {
@@ -39,4 +38,3 @@ public class SessionJwtWebConfigurer implements WebMvcConfigurer {
         }
     }
 }
-
