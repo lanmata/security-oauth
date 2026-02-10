@@ -30,4 +30,6 @@ Please keep Javadoc comments in English. New code should include JavaDoc for pub
 ## License and authors
 See `pom.xml` for author contact information and project metadata.
 
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=lanmata_security-oauth)](https://sonarcloud.io/summary/new_code?id=lanmata_security-oauth)
+
 End of README.
