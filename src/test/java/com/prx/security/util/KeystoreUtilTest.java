@@ -1,13 +1,13 @@
 package com.prx.security.util;
 
-import com.prx.security.exception.CertificateSecurityException;
 import com.prx.security.properties.StoreProperties;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.security.KeyStore;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class KeystoreUtilTest {
 

@@ -9,7 +9,11 @@ import org.springframework.web.method.HandlerMethod;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class SessionJwtInterceptorTest {
@@ -39,8 +43,28 @@ class SessionJwtInterceptorTest {
     }
 
     @Test
+    @DisplayName("preHandle returns true when token is valid")
+    void preHandleReturnsTrueWhenTokenValid() {
+        SessionJwtService service = mock(SessionJwtService.class);
+        SessionJwtInterceptor interceptor = new SessionJwtInterceptor(service);
+
+        HttpServletRequest req = mock(HttpServletRequest.class);
+        HttpServletResponse resp = mock(HttpServletResponse.class);
+
+        String token = "validToken";
+        when(req.getHeader("session-token")).thenReturn(token);
+        when(service.isValid(token)).thenReturn(true);
+
+        Object handler = new Object();
+
+        assertTrue(interceptor.preHandle(req, resp, handler));
+        verify(resp, never()).setStatus(anyInt());
+        verify(resp, never()).addHeader(eq("Message-ID"), eq("Token invalid."));
+    }
+
+    @Test
     @DisplayName("preHandle returns false when token invalid")
-    void preHandleReturnsFalseWhenTokenInvalid() throws Exception {
+    void preHandleReturnsFalseWhenTokenInvalid() {
         SessionJwtService service = mock(SessionJwtService.class);
         when(service.isValid("badToken")).thenReturn(false);
         SessionJwtInterceptor interceptor = new SessionJwtInterceptor(service);
@@ -52,5 +76,41 @@ class SessionJwtInterceptorTest {
         Object handler = new Object();
 
         assertFalse(interceptor.preHandle(req, resp, handler));
+        verify(resp).setStatus(401);
+        verify(resp).addHeader(eq("Message-ID"), eq("Token invalid."));
+    }
+
+    @Test
+    @DisplayName("preHandle returns false when token is null")
+    void preHandleReturnsFalseWhenTokenNull() {
+        SessionJwtService service = mock(SessionJwtService.class);
+        SessionJwtInterceptor interceptor = new SessionJwtInterceptor(service);
+
+        HttpServletRequest req = mock(HttpServletRequest.class);
+        HttpServletResponse resp = mock(HttpServletResponse.class);
+        when(req.getHeader("session-token")).thenReturn(null);
+
+        Object handler = new Object();
+
+        assertFalse(interceptor.preHandle(req, resp, handler));
+        verify(resp).setStatus(401);
+        verify(resp).addHeader(eq("Message-ID"), eq("Token invalid."));
+    }
+
+    @Test
+    @DisplayName("preHandle returns false when token is blank")
+    void preHandleReturnsFalseWhenTokenBlank() {
+        SessionJwtService service = mock(SessionJwtService.class);
+        SessionJwtInterceptor interceptor = new SessionJwtInterceptor(service);
+
+        HttpServletRequest req = mock(HttpServletRequest.class);
+        HttpServletResponse resp = mock(HttpServletResponse.class);
+        when(req.getHeader("session-token")).thenReturn("   ");
+
+        Object handler = new Object();
+
+        assertFalse(interceptor.preHandle(req, resp, handler));
+        verify(resp).setStatus(401);
+        verify(resp).addHeader(eq("Message-ID"), eq("Token invalid."));
     }
 }

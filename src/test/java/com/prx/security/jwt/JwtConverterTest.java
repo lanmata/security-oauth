@@ -1,6 +1,5 @@
 package com.prx.security.jwt;
 
-import com.prx.security.exception.JwtConverterException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.authentication.AbstractAuthenticationToken;

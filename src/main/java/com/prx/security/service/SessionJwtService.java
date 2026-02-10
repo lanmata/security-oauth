@@ -30,7 +30,6 @@ public interface SessionJwtService {
         try {
             Claims claims = getTokenClaims(token);
             return LocalDateTime.now().isAfter(claims.getExpiration().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
-//            return claims.getExpiration().before(new Date());
         } catch (ExpiredJwtException e) {
             return true;
         } catch (Exception e) {
@@ -48,9 +47,7 @@ public interface SessionJwtService {
         try {
             Claims claims = getTokenClaims(token);
             return SESSION_TOKEN_KEY.equals(claims.get("type")) && !isTokenExpired(token);
-        } catch (ExpiredJwtException | NotImplementedException e) {
-            return false;
-        }  catch (Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }
