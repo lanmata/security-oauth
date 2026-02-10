@@ -74,6 +74,9 @@
             **/loggers/interceptor/*,**/exception/*,**/mapper/*,**/util/*,
             **/converter/*, **/*Test*, **/JwtConverter.*,**/*.java
         </sonar.exclusions>
+        <sonar.coverage.jacoco.xmlReportPaths>
+            ../${project.name}}/target/site/jacoco-aggregate/jacoco.xml
+        </sonar.coverage.jacoco.xmlReportPaths>
         <project.ruleset>${project.basedir}/ruleset.xml</project.ruleset>
         <!-- Centralized 3rd-party versions -->
         <commons-lang3.version>3.17.0</commons-lang3.version>
@@ -365,7 +368,7 @@
                                         <limit>
                                             <counter>BRANCH</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.60</minimum>
+                                            <minimum>0.80</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
@@ -428,6 +431,37 @@
                 <!-- jacoco-maven-plugin honors property 'jacoco.skip' to disable agent -->
                 <jacoco.skip>true</jacoco.skip>
             </properties>
+        </profile>
+        <profile>
+            <id>coverage</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>0.8.14</version>
+                        <executions>
+                            <execution>
+                                <id>prepare-agent</id>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>report</id>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                                <configuration>
+                                    <formats>
+                                        <format>XML</format>
+                                    </formats>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 
