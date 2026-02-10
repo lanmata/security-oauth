@@ -1,12 +1,14 @@
 package com.prx.security.interceptor;
 
 import com.prx.security.service.SessionJwtService;
+import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.method.HandlerMethod;
 
+import static com.prx.security.constant.ConstantApp.SESSION_TOKEN_KEY;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -19,8 +21,12 @@ import static org.mockito.Mockito.when;
 class SessionJwtInterceptorTest {
 
     public static class DummyController {
-        public void testMethod() {}
-        public void other() {}
+        public void testMethod() {
+            // empty content
+        }
+        public void other() {
+            // empty content
+        }
     }
 
     @Test
@@ -112,5 +118,28 @@ class SessionJwtInterceptorTest {
         assertFalse(interceptor.preHandle(req, resp, handler));
         verify(resp).setStatus(401);
         verify(resp).addHeader(eq("Message-ID"), eq("Token invalid."));
+    }
+
+    @Test
+    @DisplayName("preHandle returns false and sets UNAUTHORIZED when SignatureException is thrown")
+    void preHandleSignatureExceptionSetsUnauthorized() {
+        // Arrange
+        SessionJwtService sessionJwtService = mock(SessionJwtService.class);
+        SessionJwtInterceptor interceptor = new SessionJwtInterceptor(sessionJwtService);
+
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+
+        String token = "bad.token.value";
+        when(request.getHeader(SESSION_TOKEN_KEY)).thenReturn(token);
+        when(sessionJwtService.isValid(token)).thenThrow(new SignatureException("Invalid signature token"));
+
+        // Act
+        boolean result = interceptor.preHandle(request, response, new Object());
+
+        // Assert
+        assertFalse(result);
+        verify(response).setStatus(401);
+        verify(response).addHeader(eq("Message-ID"), eq("Invalid signature token"));
     }
 }
