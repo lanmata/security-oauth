@@ -280,7 +280,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.version}</version>
                 <configuration>
-                    <argLine/>
+                    <argLine>${argLine}</argLine>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -291,25 +291,18 @@
                 </dependencies>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
-                <version>2.8.1</version>
-            </plugin>
-            <plugin>
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>${maven.plugin.pmd.version}</version>
                 <configuration>
-                    <!-- Skip PMD by default to avoid ASM Unsupported class file major version errors during CI/builds.
-                         Enable by removing this line or set to false after upgrading PMD/plugin runtime. -->
-                    <targetJdk>${java.version}</targetJdk>
-                    <linkXRef>false</linkXRef>
-                    <rulesets>
-                        <ruleset>${project.ruleset}</ruleset>
-                    </rulesets>
-                    <excludes>
-                        <exclude>${sonar.exclusions}</exclude>
-                    </excludes>
-                </configuration>
+                     <targetJdk>${java.version}</targetJdk>
+                     <linkXRef>false</linkXRef>
+                     <rulesets>
+                         <ruleset>${project.ruleset}</ruleset>
+                     </rulesets>
+                     <excludes>
+                         <exclude>${sonar.exclusions}</exclude>
+                     </excludes>
+                 </configuration>
                 <executions>
                     <execution>
                         <id>pmd-check</id>
