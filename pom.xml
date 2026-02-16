@@ -32,7 +32,6 @@
         <java.version>21</java.version>
         <!-- argLine used by Surefire/Jacoco; default empty so builds don't fail when not set -->
         <argLine/>
-        <google.gson.version>2.10.1</google.gson.version>
         <!--        PRX Commons-->
         <com.prx.commons.version>0.0.1</com.prx.commons.version>
         <com.prx.commons-services.version>0.0.1</com.prx.commons-services.version>
@@ -52,6 +51,7 @@
         <spring-security-aouth2-autoconfigure.version>3.4.1</spring-security-aouth2-autoconfigure.version>
 
         <!-- Centralized explicit versions previously hard-coded in dependencies -->
+        <google.gson.version>2.13.2</google.gson.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <jwt.version>0.12.3</jwt.version>
         <poi.version>5.2.4</poi.version>
@@ -219,12 +219,6 @@
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.junit.vintage</groupId>-->
-<!--            <artifactId>junit-vintage-engine</artifactId>-->
-<!--            <version>${junit.jupiter.version}</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
