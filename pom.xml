@@ -44,45 +44,44 @@
         <maven.plugin.pmd.version>3.28.0</maven.plugin.pmd.version>
         <maven.plugin.jxr.version>3.0.0</maven.plugin.jxr.version>
         <maven.surefire.version>3.5.2</maven.surefire.version>
-        <!--        REPOSITORY-->
-        <!--suppress UnresolvedMavenProperty -->
-        <repsy.account.user>${env.REPSY_ACCOUNT_USER}</repsy.account.user>
-        <!--suppress UnresolvedMavenProperty -->
-        <repsy.account.password>${env.REPSY_ACCOUNT_PASSWORD}</repsy.account.password>
         <!--        SPRING -->
-        <spring-core.version>6.2.1</spring-core.version>
         <spring-boot.version>3.5.8</spring-boot.version>
         <spring-cloud.version>2025.0.1</spring-cloud.version>
+        <spring-core.version>6.2.1</spring-core.version>
         <spring-cloud-dependencies.version>4.2.0</spring-cloud-dependencies.version>
         <spring-security-aouth2-autoconfigure.version>3.4.1</spring-security-aouth2-autoconfigure.version>
-        <spring-cloud-dependencies.version.version>4.1.3</spring-cloud-dependencies.version.version>
-        <mapstruct.version>1.5.5.Final</mapstruct.version>
-        <!--        JWT Dependencies version-->
+
+        <!-- Centralized explicit versions previously hard-coded in dependencies -->
+        <mapstruct.version>1.6.3</mapstruct.version>
         <jwt.version>0.12.3</jwt.version>
+        <poi.version>5.2.4</poi.version>
+        <tomcat.version>11.0.15</tomcat.version>
+        <commons-compress.version>1.21</commons-compress.version>
+        <asm.version>9.7</asm.version>
+        <commons-lang3.version>3.18.0</commons-lang3.version>
+        <log4j.version>2.25.3</log4j.version>
+
         <!--        Test Dependencies-->
         <!--        JUnit 5.x-->
-        <junit.jupiter.version>5.11.3</junit.jupiter.version>
-        <junit.jupiter.core.version>5.9.3</junit.jupiter.core.version>
+        <junit.jupiter.version>5.14.1</junit.jupiter.version>
         <!--        Mockito-->
-        <mockserver.junit.jupiter.version>5.15.0</mockserver.junit.jupiter.version>
-        <mockito.junit.jupiter.version>4.8.0</mockito.junit.jupiter.version> <!-- PENDING to remove-->
         <mockito.version>5.21.0</mockito.version>
+
         <!--        Coverage and Sonar-->
-        <sonar.organization>prx</sonar.organization>
+        <sonar.organization>lamm</sonar.organization>
+        <sonar.projectKey>lanmata-security-oauth</sonar.projectKey>
+        <sonar.projectName>lanmata-security-oauth</sonar.projectName>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <!-- Do not exclude all Java files — previous config removed all Java from Sonar analysis. Keep resource/config exclusions only. -->
         <sonar.exclusions>
             **/*.xml,**/config/*,**/config/security/*,**/interceptor/*,
             **/loggers/interceptor/*,**/exception/*,**/mapper/*,**/util/*,
             **/converter/*, **/*Test*, **/JwtConverter.*
         </sonar.exclusions>
+        <sonar.coverage.exclusions>${sonar.exclusions}</sonar.coverage.exclusions>
+        <!-- Include only production sources for coverage reporting (exclude tests). Adjust glob if your sources live elsewhere) -->
         <sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         <project.ruleset>${project.basedir}/ruleset.xml</project.ruleset>
-        <!-- Centralized 3rd-party versions -->
-        <commons-lang3.version>3.17.0</commons-lang3.version>
-        <!-- Centralized explicit versions previously hard-coded in dependencies -->
-        <tomcat.version>11.0.15</tomcat.version>
-        <poi.version>5.2.4</poi.version>
-        <asm.version>9.7</asm.version>
-        <commons-compress.version>1.21</commons-compress.version>
     </properties>
 
     <dependencies>
@@ -220,16 +219,16 @@
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
-            <version>${junit.jupiter.version}</version>
-            <scope>test</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.junit.vintage</groupId>-->
+<!--            <artifactId>junit-vintage-engine</artifactId>-->
+<!--            <version>${junit.jupiter.version}</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
-            <version>1.21</version>
+            <version>${commons-compress.version}</version>
         </dependency>
     </dependencies>
 
@@ -258,17 +257,17 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-compress</artifactId>
-                <version>1.21</version>
+                <version>${commons-compress.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi-ooxml</artifactId>
-                <version>5.2.4</version>
+                <version>${poi.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-core</artifactId>
-                <version>2.20.0</version>
+                <version>${log4j.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
