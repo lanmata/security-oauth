@@ -1,108 +1,111 @@
 {
   "properties": [
     {
-      "name": "app.clientRoles",
+      "name": "umdc.backbone.base-url",
       "type": "java.lang.String",
-      "description": "Description for app.clientRoles."
+      "description": "Base URL for BackbonePublicClient (backbone-rest session validate + M2M introspect). Defaults to the QA backbone URL when unset — override per environment.",
+      "defaultValue": "https://api.umdc-qa.tst/backbone"
     },
     {
-      "name": "app.name",
+      "name": "umdc.management.clientRoles",
       "type": "java.lang.String",
-      "description": "Description for app.name."
+      "description": "Comma-separated roles allowed to access protected API endpoints. Canonical property name."
     },
     {
-      "name": "app.api.endpoint",
+      "name": "umdc.clientRoles",
       "type": "java.lang.String",
-      "description": "Description for app.api.endpoint."
+      "description": "Legacy compatibility alias for umdc.management.clientRoles."
     },
     {
-      "name": "app.api.excludes",
-      "type": "java.util.List<java.lang.String>",
-      "description": "Description for app.api.endpoint.",
-      "defaultValue": [
-        ""
-      ]
+      "name": "umdc.app.name",
+      "type": "java.lang.String",
+      "description": "Application name used by the Umdc security integration."
     },
     {
-      "name": "app.version",
+      "name": "umdc.api.endpoint",
       "type": "java.lang.String",
-      "description": "Description for app.version."
+      "description": "Base endpoint path secured by the library (for example, /api)."
     },
     {
-      "name": "prx.jwt.secret",
+      "name": "umdc.app.version",
       "type": "java.lang.String",
-      "description": "Description for prx.jwt.secret."
+      "description": "Application version used by the Umdc security integration."
     },
     {
-      "name": "prx.jwt.expirationMs",
+      "name": "umdc.security.jwt.secret",
       "type": "java.lang.String",
-      "description": "Description for prx.jwt.expirationMs."
+      "description": "Description for umdc.security.jwt.secret."
     },
     {
-      "name": "prx.jwt.issuer",
+      "name": "umdc.security.jwt.expirationMs",
       "type": "java.lang.String",
-      "description": "Description for prx.jwt.issuer."
+      "description": "Description for umdc.security.jwt.expirationMs."
     },
     {
-      "name": "prx.jwt.audience",
+      "name": "umdc.security.jwt.issuer",
       "type": "java.lang.String",
-      "description": "Description for prx.jwt.audience."
+      "description": "Description for umdc.security.jwt.issuer."
     },
     {
-      "name": "prx.jwt.subject",
+      "name": "umdc.security.jwt.audience",
       "type": "java.lang.String",
-      "description": "Description for prx.jwt.subject."
+      "description": "Description for umdc.security.jwt.audience."
     },
     {
-      "name": "prx.jwt.claims",
+      "name": "umdc.security.jwt.subject",
       "type": "java.lang.String",
-      "description": "Description for prx.jwt.claims."
+      "description": "Description for umdc.security.jwt.subject."
     },
     {
-      "name": "prx.jwt.roles",
+      "name": "umdc.security.jwt.claims",
       "type": "java.lang.String",
-      "description": "Description for prx.jwt.roles."
+      "description": "Description for umdc.security.jwt.claims."
     },
     {
-      "name": "prx.jwt.authorities",
+      "name": "umdc.security.jwt.roles",
       "type": "java.lang.String",
-      "description": "Description for prx.jwt.authorities."
+      "description": "Description for umdc.security.jwt.roles."
     },
     {
-      "name": "prx.jwt.permissions",
+      "name": "umdc.security.jwt.authorities",
       "type": "java.lang.String",
-      "description": "Description for prx.jwt.permissions."
+      "description": "Description for umdc.security.jwt.authorities."
     },
     {
-      "name": "prx.jwt.claims.roles",
+      "name": "umdc.security.jwt.permissions",
       "type": "java.lang.String",
-      "description": "Description for prx.jwt.claims.roles.",
+      "description": "Description for umdc.security.jwt.permissions."
+    },
+    {
+      "name": "umdc.security.jwt.claims.roles",
+      "type": "java.lang.String",
+      "description": "Description for umdc.security.jwt.claims.roles.",
       "defaultValue": ""
     },
     {
-      "name": "prx.jwt.claims.authorities",
+      "name": "umdc.security.jwt.claims.authorities",
       "type": "java.lang.String",
-      "description": "Description for prx.jwt.claims.authorities."
+      "description": "Description for umdc.security.jwt.claims.authorities."
     },
     {
-      "name": "prx.jwt.claims.permissions",
+      "name": "umdc.security.jwt.claims.permissions",
       "type": "java.lang.String",
-      "description": "Description for prx.jwt.claims.permissions."
+      "description": "Description for umdc.security.jwt.claims.permissions."
     },
     {
-      "name": "prx.jwt.claims.clientRoles",
+      "name": "umdc.security.jwt.claims.clientRoles",
       "type": "java.lang.String",
-      "description": "Description for prx.jwt.claims.clientRoles."
+      "description": "Description for umdc.security.jwt.claims.clientRoles."
     },
     {
-      "name": "prx.jwt.claims.clientRolesKey",
+      "name": "umdc.security.jwt.claims.clientRolesKey",
       "type": "java.lang.String",
-      "description": "Description for prx.jwt.claims.clientRolesKey."
+      "description": "Description for umdc.security.jwt.claims.clientRolesKey."
     },
     {
-      "name": "prx.jwt.claims.clientRolesSeparator",
+      "name": "umdc.security.jwt.claims.clientRolesSeparator",
       "type": "java.lang.String",
-      "description": "Description for prx.jwt.claims.clientRolesSeparator.",
+      "description": "Description for umdc.security.jwt.claims.clientRolesSeparator.",
       "defaultValue": ","
     }
   ]
