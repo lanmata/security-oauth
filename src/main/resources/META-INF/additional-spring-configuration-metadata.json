@@ -3,8 +3,7 @@
     {
       "name": "umdc.backbone.base-url",
       "type": "java.lang.String",
-      "description": "Base URL for BackbonePublicClient (backbone-rest session validate + M2M introspect). Defaults to the QA backbone URL when unset — override per environment.",
-      "defaultValue": "https://api.umdc-qa.tst/backbone"
+      "description": "Base URL for BackbonePublicClient (backbone-rest session validate + M2M introspect). Must be explicitly configured for each environment."
     },
     {
       "name": "umdc.management.clientRoles",

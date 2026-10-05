@@ -1,5 +1,6 @@
 package com.umdc.security.client;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,6 +19,7 @@ import org.springframework.context.annotation.Configuration;
  * </p>
  */
 @Configuration
+@ConditionalOnClass(name = "org.springframework.cloud.openfeign.FeignClient")
 @EnableFeignClients(basePackages = "com.umdc.security.client")
 public class BackboneFeignClientConfig {
 

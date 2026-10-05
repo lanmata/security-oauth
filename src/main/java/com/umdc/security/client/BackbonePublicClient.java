@@ -28,7 +28,7 @@ import static com.umdc.security.constant.ConstantApp.SESSION_TOKEN_KEY;
  * {@code com.umdc.security} — see {@link BackboneFeignClientConfig}.
  * </p>
  */
-@FeignClient(name = "backbonePublicClient", url = "${umdc.backbone.base-url:https://api.umdc-qa.tst/backbone}")
+@FeignClient(name = "backbonePublicClient", url = "${umdc.backbone.base-url}")
 public interface BackbonePublicClient {
 
     @GetMapping("/api/v1/session/validate")
