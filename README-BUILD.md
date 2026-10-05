@@ -33,7 +33,7 @@ This document describes how to build, run tests, generate coverage, and produce 
 
 - Run a single test class (example):
 
-    mvn -Dtest=com.prx.security.jwt.JwtConverterTest test
+    mvn -Dtest=jwt.com.umdc.security.JwtConverterTest test
 
 ## Where to find reports
 - Surefire unit test reports: `target/surefire-reports/`

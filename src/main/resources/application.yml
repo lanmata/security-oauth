@@ -1,8 +1,16 @@
-prx:
-  auth:
-    converter:
-      resource-id: ${AUTH_CLIENT_ID}
-      principal-claim-name: ${AUTH_RESOURCE_PRINCIPAL}
-  jwt:
-    secret: ${APP_TOKEN_SECRET}
-    expirationMs: ${APP_TOKEN_EXPIRATION}
+umdc:
+  # management:
+  #   clientRoles: ${APP_CLIENT_ROLES:ADMIN,USER}
+  # api:
+  #   endpoint: ${APP_API_ENDPOINT:/api}
+  #   (per-endpoint exclusion from SessionJwtInterceptor is now done via the
+  #   @SkipSessionValidation annotation, not umdc.api.excludes/exclude.methods —
+  #   both removed, see SessionJwtInterceptor's Javadoc for why)
+  security:
+    auth:
+      converter:
+        resource-id: ${AUTH_CLIENT_ID}
+        principal-claim-name: ${AUTH_RESOURCE_PRINCIPAL}
+    jwt:
+      secret: ${APP_TOKEN_SECRET}
+      expirationMs: ${APP_TOKEN_EXPIRATION}
