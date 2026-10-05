@@ -1,4 +1,4 @@
-# PRX Security OAuth
+# UMDC Security OAuth
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=lanmata_security-oauth)](https://sonarcloud.io/summary/new_code?id=lanmata_security-oauth)
 
 <!-- Tech badges -->
