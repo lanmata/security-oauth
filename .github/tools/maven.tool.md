@@ -9,7 +9,7 @@ used-by: [Orchestrator, Developer, Test Writer, Security Reviewer, DevOps Engine
 # Maven Build Tool
 
 ## Purpose
-Provide the canonical commands for building and validating this Java 21 library from `pom.xml`.
+Provide the canonical commands for building and validating this Java 25 library from `pom.xml`.
 
 ## Available Commands
 
@@ -39,7 +39,7 @@ mvn -DskipTests=false clean deploy
 - `target/site/`
 
 ## Notes
-- Requires JDK 21 and Maven 3.8+.
+- Requires JDK 25 and Maven 3.8+.
 - Private dependencies and publishing may require access to `https://repo.repsy.io/mvn/lmata/prx`.
 - Prefer `pom.xml` over README badges when versions disagree.
 

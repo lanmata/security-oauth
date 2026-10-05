@@ -33,7 +33,7 @@ Maven lifecycle orchestration, Surefire, JaCoCo, PMD, SonarCloud Maven scanner, 
 
 ## Conventions to Follow
 - Keep commands aligned with `pom.xml`, `README-BUILD.md`, and `.github/workflows/*`.
-- Preserve JDK 21 as the build baseline unless the project itself changes.
+- Preserve JDK 25 as the build baseline unless the project itself changes.
 - Treat private repository access (`PRX-Repsy`) and environment-driven publishing as operational constraints.
 - Prefer explicit report paths and CI artifact locations already documented in the repository.
 

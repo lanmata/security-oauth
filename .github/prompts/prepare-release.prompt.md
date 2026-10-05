@@ -24,7 +24,7 @@ tools: [read_file, grep_search, file_search, apply_patch, create_file, run_in_te
 
 ## Constraints
 - Do not claim a release is ready if private dependencies, secrets, or CI gates are unresolved.
-- Preserve JDK 21 and current Maven lifecycle assumptions unless the release explicitly changes them.
+- Preserve JDK 25 and current Maven lifecycle assumptions unless the release explicitly changes them.
 - Keep release notes grounded in repository changes, not generic templates.
 
 ## Output Format

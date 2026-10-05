@@ -5,9 +5,9 @@
 | Field | Value |
 |---|---|
 | Name | `security-oauth` |
-| Language | Java 21 |
+| Language | Java 25 |
 | Build tool | Maven |
-| Framework | Spring Boot 4.0.6 + Spring Security resource server |
+| Framework | Spring Boot 4.1.1 + Spring Security resource server |
 | Test tool | JUnit Jupiter + Mockito via Maven Surefire |
 | Lint/analysis | PMD, JaCoCo, SonarCloud, Qodana, GitLab SAST |
 | Config system | Spring `@ConfigurationProperties` + `application.yml` + environment variables |
