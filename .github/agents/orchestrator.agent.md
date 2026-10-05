@@ -29,7 +29,7 @@ skill-definition: '.github/skills/orchestrator/SKILL.md'
 Coordinate multi-step work in `security-oauth`, especially changes that touch Spring Security configuration, JWT conversion, auth API contracts, tests, and CI quality gates.
 
 ## Tech Stack Expertise
-Java 21, Maven, Spring Boot 4.0.6, Spring Security resource server, JWT/JJWT, JUnit 5, Mockito, JaCoCo, PMD, SonarCloud, Qodana, GitHub Actions, and GitLab SAST.
+Java 25, Maven, Spring Boot 4.1.1, Spring Security resource server, JWT/JJWT, JUnit 5, Mockito, JaCoCo, PMD, SonarCloud, Qodana, GitHub Actions, and GitLab SAST.
 
 ## Conventions to Follow
 - Treat this repository as a reusable library, not a standalone application.

@@ -16,7 +16,7 @@ This repository now includes a project-adapted agent infrastructure for the `sec
 - Security or release work: `.github/prompts/security-audit.prompt.md`, `.github/prompts/prepare-release.prompt.md`
 
 ## Project-Specific Realities Captured by This Infrastructure
-- Java 21 + Maven + Spring Security resource server library
+- Java 25 + Maven + Spring Security resource server library
 - Auth contract centered on `AuthAPi` and `AuthApiController`
 - JWT, interceptor, and keystore-sensitive areas highlighted for security review
 - PMD, JaCoCo, SonarCloud, Qodana, and GitLab SAST captured as quality/security gates

@@ -26,7 +26,7 @@ skill-definition: '.github/skills/developer/SKILL.md'
 Implement features and fixes in the library code under `src/main/java/com/umdc/security/**`, preserving its public API style and Spring Security integration patterns.
 
 ## Tech Stack Expertise
-Java 21, Maven, Spring Boot configuration properties, Spring Security `SecurityFilterChain`, JWT conversion, servlet interceptors, `ResponseEntity`, and library-style reusable components.
+Java 25, Maven, Spring Boot configuration properties, Spring Security `SecurityFilterChain`, JWT conversion, servlet interceptors, `ResponseEntity`, and library-style reusable components.
 
 ## Conventions to Follow
 - Preserve package structure under `com.umdc.security`.

@@ -1,6 +1,6 @@
 ---
 name: Developer Skills
-description: Consolidated skill set — Java 21, Maven, Spring Security, and library implementation
+description: Consolidated skill set — Java 25, Maven, Spring Security, and library implementation
 applies-to: [Developer]
 ---
 

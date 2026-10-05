@@ -33,7 +33,7 @@ applies-to: [DevOps Engineer]
 
 ## 5. Constraints
 - Do not add duplicate CI steps that already exist in Maven or workflows.
-- Do not break JDK 21 compatibility.
+- Do not break JDK 25 compatibility.
 - Do not assume PRX private repository credentials are available in every environment.
 
 ## 6. Checklist

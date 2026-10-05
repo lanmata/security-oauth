@@ -1,6 +1,6 @@
 # Build Validation Report
 
-Project: PRX Security Oauth (security-oauth)
+Project: UMDC Security Oauth (security-oauth)
 Date: 2026-02-11
 
 Summary
