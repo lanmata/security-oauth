@@ -7,11 +7,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
 import org.springframework.security.oauth2.server.resource.introspection.BadOpaqueTokenException;
+import org.springframework.security.oauth2.server.resource.introspection.OAuth2IntrospectionException;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -70,6 +72,8 @@ class BackboneOpaqueTokenIntrospectorTest {
         when(backbonePublicClient.introspect(any(ManagedClientTokenIntrospectRequest.class)))
                 .thenThrow(new RuntimeException("connection refused"));
 
-        assertThrows(BadOpaqueTokenException.class, () -> introspector.introspect("any-token"));
+        OAuth2IntrospectionException ex = assertThrowsExactly(OAuth2IntrospectionException.class,
+                () -> introspector.introspect("any-token"));
+        assertEquals("connection refused", ex.getCause().getMessage());
     }
 }
