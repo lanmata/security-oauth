@@ -4,7 +4,7 @@
 This document describes how to build, run tests, generate coverage, and produce Javadoc for the `security-oauth` project on Windows (PowerShell).
 
 ## Prerequisites
-- Java: JDK 21 installed and `JAVA_HOME` set
+- Java: JDK 25 installed and `JAVA_HOME` set
 - Maven: 3.8.x or later installed and on the PATH
 - Shell: PowerShell (commands shown below are PowerShell-compatible)
 - Internet access to fetch dependencies (and access to the `PRX-Repsy` repository if using internal artifacts)
@@ -13,7 +13,7 @@ This document describes how to build, run tests, generate coverage, and produce 
 - `REPSY_ACCOUNT_USER` and `REPSY_ACCOUNT_PASSWORD` - used when publishing to the `repsy` repository. They are referenced in `pom.xml` as `${env.REPSY_ACCOUNT_USER}` and `${env.REPSY_ACCOUNT_PASSWORD}`.
 
 ## JaCoCo
-- The project uses JaCoCo Maven plugin version 0.8.14 (explicitly set in `pom.xml`). Do not upgrade to 0.8.15 unless you confirm compatibility with your toolchain. The POM config generates both XML and HTML reports during the `verify` phase.
+- The project uses JaCoCo Maven plugin version 0.8.15 (explicitly set in `pom.xml`, required for Java 25 class files). The POM config generates both XML and HTML reports during the `verify` phase.
 - XML report path (for CI/Sonar): `target/site/jacoco/jacoco.xml`
 
 ## Quick commands (PowerShell)
@@ -33,7 +33,7 @@ This document describes how to build, run tests, generate coverage, and produce 
 
 - Run a single test class (example):
 
-    mvn -Dtest=com.prx.security.jwt.JwtConverterTest test
+    mvn -Dtest=jwt.com.umdc.security.JwtConverterTest test
 
 ## Where to find reports
 - Surefire unit test reports: `target/surefire-reports/`
@@ -60,7 +60,7 @@ This document describes how to build, run tests, generate coverage, and produce 
 - Use small, deterministic tests that run quickly so `mvn verify` remains fast in CI.
 
 ## Troubleshooting
-If a build fails due to missing internal artifacts, ensure the `PRX-Repsy` repository credentials are valid or remove the dependency on `com.prx` artifacts while running locally.
+If a build fails due to missing internal artifacts, ensure the `PRX-Repsy` repository credentials are valid or remove the dependency on `com.umdc` artifacts while running locally.
 
 ## Contact
 If you have questions about this build, contact the maintainer listed in `pom.xml`.
