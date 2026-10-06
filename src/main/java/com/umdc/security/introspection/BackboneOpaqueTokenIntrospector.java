@@ -13,9 +13,9 @@ import org.springframework.security.oauth2.server.resource.introspection.OpaqueT
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -57,7 +57,7 @@ public class BackboneOpaqueTokenIntrospector implements OpaqueTokenIntrospector 
 
         List<String> scopes = Objects.isNull(response.scopes()) ? List.of() : response.scopes();
 
-        Map<String, Object> claims = new HashMap<>();
+        Map<String, Object> claims = new ConcurrentHashMap<>();
         claims.put(OAuth2TokenIntrospectionClaimNames.ACTIVE, response.active());
         if (Objects.nonNull(response.clientId())) {
             claims.put(OAuth2TokenIntrospectionClaimNames.CLIENT_ID, response.clientId());
