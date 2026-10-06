@@ -3,12 +3,14 @@ package com.umdc.security.introspection;
 import com.umdc.security.client.BackbonePublicClient;
 import com.umdc.security.client.to.ManagedClientTokenIntrospectRequest;
 import com.umdc.security.client.to.ManagedClientTokenIntrospectResponse;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
 import org.springframework.security.oauth2.core.OAuth2TokenIntrospectionClaimNames;
 import org.springframework.security.oauth2.server.resource.introspection.BadOpaqueTokenException;
 import org.springframework.security.oauth2.server.resource.introspection.OAuth2IntrospectionAuthenticatedPrincipal;
+import org.springframework.security.oauth2.server.resource.introspection.OAuth2IntrospectionException;
 import org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector;
 import org.springframework.stereotype.Component;
 
@@ -35,6 +37,7 @@ import java.util.stream.Collectors;
  * </p>
  */
 @Component
+@ConditionalOnClass(name = "org.springframework.cloud.openfeign.FeignClient")
 public class BackboneOpaqueTokenIntrospector implements OpaqueTokenIntrospector {
 
     private final BackbonePublicClient backbonePublicClient;
@@ -49,7 +52,7 @@ public class BackboneOpaqueTokenIntrospector implements OpaqueTokenIntrospector 
         try {
             response = backbonePublicClient.introspect(new ManagedClientTokenIntrospectRequest(token));
         } catch (Exception e) {
-            throw new BadOpaqueTokenException("Unable to reach backbone introspection endpoint", e);
+            throw new OAuth2IntrospectionException("Unable to reach backbone introspection endpoint", e);
         }
         if (Objects.isNull(response) || !response.active()) {
             throw new BadOpaqueTokenException("Token is not active");
