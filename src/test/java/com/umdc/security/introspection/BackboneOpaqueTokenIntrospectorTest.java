@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
 import org.springframework.security.oauth2.server.resource.introspection.BadOpaqueTokenException;
+import org.springframework.security.oauth2.server.resource.introspection.OAuth2IntrospectionException;
 
 import java.util.List;
 
@@ -70,6 +71,6 @@ class BackboneOpaqueTokenIntrospectorTest {
         when(backbonePublicClient.introspect(any(ManagedClientTokenIntrospectRequest.class)))
                 .thenThrow(new RuntimeException("connection refused"));
 
-        assertThrows(BadOpaqueTokenException.class, () -> introspector.introspect("any-token"));
+        assertThrows(OAuth2IntrospectionException.class, () -> introspector.introspect("any-token"));
     }
 }
