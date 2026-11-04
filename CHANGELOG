@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade stack to Java 25, Spring Boot 4.1.1 and Spring Cloud 2025.1.3.
 - Security: override Jackson (2.22.3 / 3.2.3), Netty (4.2.18.Final), Logback (1.6.5) and BouncyCastle (1.86) to fix reported CVEs.
 - Rename project to UMDC Security OAuth (`com.umdc` group and packages).
+- Dependencies: Spring Boot 4.1.2, Spring Cloud 2025.1.4 / OpenFeign 5.0.4, Tomcat 11.0.27, Jackson 2.22.4 / 3.2.4, Netty 4.2.20.Final, Logback 1.6.6, Gson 2.15.0, Commons Lang 3.21.0, Mockito 5.24.0, ASM 9.11.1, JaCoCo 0.8.16, Surefire 3.6.1, Compiler plugin 3.16.0, Resources plugin 3.5.0 and JXR 3.6.0.
+- Security (Snyk): pin Hibernate Validator 9.1.6.Final and Objenesis 3.6 in `dependencyManagement`; Tomcat and Jackson 3 bumped to patched releases.
+- Jackson 3 migration: remove `jjwt-jackson` (Jackson 2) and add `Jackson3JwtSerializer` / `Jackson3JwtDeserializer` (`com.umdc.security.jwt.json`), registered via `META-INF/services` so JJWT uses `tools.jackson` for JSON. Duplicate keys and trailing tokens are still rejected.
+- Remaining Jackson 2 artifacts (`jackson-databind`, `-dataformat-yaml`, `-datatype-jsr310`) come transitively from `swagger-core` (through `commons-services`) and are pinned to 2.22.4.
+- Tests: add unit tests for the Jackson 3 adapters, service defaults, controller, configuration beans and properties (139 tests, method coverage 88.5%).
+- Docs: add user guide and technical guide under `docs/`.
 
 ## Version 0.0.1
 - Initial version.
