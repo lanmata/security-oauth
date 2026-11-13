@@ -40,6 +40,9 @@ import java.util.stream.Collectors;
 @ConditionalOnClass(name = "org.springframework.cloud.openfeign.FeignClient")
 public class BackboneOpaqueTokenIntrospector implements OpaqueTokenIntrospector {
 
+    /** Claim carrying the UUID of the application the managed client belongs to (when backbone-rest returns it). */
+    public static final String APPLICATION_ID_CLAIM = "application_id";
+
     private final BackbonePublicClient backbonePublicClient;
 
     public BackboneOpaqueTokenIntrospector(BackbonePublicClient backbonePublicClient) {
@@ -77,6 +80,9 @@ public class BackboneOpaqueTokenIntrospector implements OpaqueTokenIntrospector 
         }
         if (Objects.nonNull(response.clientName())) {
             claims.put("client_name", response.clientName());
+        }
+        if (Objects.nonNull(response.applicationId())) {
+            claims.put(APPLICATION_ID_CLAIM, response.applicationId());
         }
 
         List<GrantedAuthority> authorities = scopes.stream()

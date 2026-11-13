@@ -19,6 +19,7 @@ import java.util.List;
  * @param exp        expiry time as Unix epoch seconds; {@code null} when inactive
  * @param iat        issued-at time as Unix epoch seconds; {@code null} when inactive
  * @param jti        the unique token identifier; {@code null} when inactive
+ * @param applicationId the UUID of the application the client belongs to; {@code null} when inactive or when an older backbone-rest does not return it
  */
 public record ManagedClientTokenIntrospectResponse(
         boolean active,
@@ -28,6 +29,7 @@ public record ManagedClientTokenIntrospectResponse(
         String issuer,
         Long exp,
         Long iat,
-        String jti
+        String jti,
+        String applicationId
 ) {
 }

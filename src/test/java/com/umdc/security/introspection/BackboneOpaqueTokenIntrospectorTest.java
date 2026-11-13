@@ -31,12 +31,13 @@ class BackboneOpaqueTokenIntrospectorTest {
         var response = new ManagedClientTokenIntrospectResponse(
                 true, "client-123", "mercury-integration",
                 List.of("mercury:read", "mercury:write"),
-                "backbone-rest", 9999999999L, 1000000000L, "jti-abc");
+                "backbone-rest", 9999999999L, 1000000000L, "jti-abc", "81398159-1785-46a5-15ae-f491fd1dc509");
         when(backbonePublicClient.introspect(any(ManagedClientTokenIntrospectRequest.class))).thenReturn(response);
 
         OAuth2AuthenticatedPrincipal principal = introspector.introspect("valid-token");
 
         assertEquals("client-123", principal.getName());
+        assertEquals("81398159-1785-46a5-15ae-f491fd1dc509", principal.getAttribute(BackboneOpaqueTokenIntrospector.APPLICATION_ID_CLAIM));
         assertTrue(principal.getAuthorities().stream()
                 .anyMatch(authority -> authority.getAuthority().equals("SCOPE_mercury:read")));
         assertTrue(principal.getAuthorities().stream()
@@ -47,7 +48,7 @@ class BackboneOpaqueTokenIntrospectorTest {
     @DisplayName("introspect tolerates an active response with optional fields left null")
     void introspectHandlesActiveResponseWithNullOptionalFields() {
         var response = new ManagedClientTokenIntrospectResponse(
-                true, "client-456", "another-client", null, null, null, null, null);
+                true, "client-456", "another-client", null, null, null, null, null, null);
         when(backbonePublicClient.introspect(any(ManagedClientTokenIntrospectRequest.class))).thenReturn(response);
 
         OAuth2AuthenticatedPrincipal principal = introspector.introspect("valid-token-no-scopes");
@@ -60,7 +61,7 @@ class BackboneOpaqueTokenIntrospectorTest {
     @DisplayName("introspect rejects a token backbone reports as inactive")
     void introspectRejectsInactiveToken() {
         var response = new ManagedClientTokenIntrospectResponse(
-                false, null, null, null, null, null, null, null);
+                false, null, null, null, null, null, null, null, null);
         when(backbonePublicClient.introspect(any(ManagedClientTokenIntrospectRequest.class))).thenReturn(response);
 
         assertThrows(BadOpaqueTokenException.class, () -> introspector.introspect("revoked-token"));
